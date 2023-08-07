@@ -1,14 +1,24 @@
 #include <SFML/Graphics.hpp>
+#include<iostream>
+
 
 #include "Constants.h"
+#include "Settings.h"
+#include "Visualizer.h"
+#include "Element.h"
 
 int main()
 {
-	// create a window & settings
-	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT, 32), "visualgo");
-	sf::View view = window.getDefaultView();
-	window.setFramerateLimit(144);
 
+	// create a window & settings
+	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT, 32), "visualgo", sf::Style::Fullscreen);
+	window.setFramerateLimit(144);
+	window.setVerticalSyncEnabled(true);
+
+	Settings settings(250, Merge);
+	Visualizer visualizer(settings);
+
+	visualizer.Randomize();
 
 	// while the window is kept open
 	while (window.isOpen())
@@ -17,7 +27,6 @@ int main()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-
 			// if closing window
 			switch (event.type)
 			{
@@ -39,8 +48,11 @@ int main()
 		window.clear(sf::Color(20, 20, 20));
 
 		// update
+		visualizer.Randomize();
+
 
 		// render
+		visualizer.Render(window);
 
 		// show frame / draw calls
 		window.display();

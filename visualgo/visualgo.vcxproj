@@ -161,10 +161,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Settings.cpp" />
+    <ClCompile Include="src\Element.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\SortingAlgorithms.cpp" />
+    <ClCompile Include="src\Visualizer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Settings.h" />
+    <ClInclude Include="src\Element.h" />
     <ClInclude Include="src\Constants.h" />
+    <ClInclude Include="src\SortingAlgorithms.h" />
+    <ClInclude Include="src\Visualizer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
