@@ -6,7 +6,7 @@
 #include "Settings.h"
 #include "Visualizer.h"
 #include "Element.h"
-
+#include "Sidebar.h"
 
 int main()
 {
@@ -18,9 +18,11 @@ int main()
 
 
 	Settings settings(250, Merge);
-	Visualizer visualizer(settings);
+	Visualizer visualizer(settings, window);
 
 	visualizer.Randomize();
+
+	Sidebar sidebar(settings, window);
 
 	// while the window is kept open
 	while (window.isOpen())
@@ -57,6 +59,7 @@ int main()
 
 		// render
 		visualizer.Render(window);
+		sidebar.Render(window);
 
 		// show frame / draw calls
 		window.display();

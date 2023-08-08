@@ -1,18 +1,28 @@
 #include <algorithm>
 #include <random>
 
+#include "Constants.h"
 #include "Visualizer.h"
 #include "SortingAlgorithms.h"
 
-Visualizer::Visualizer(Settings& settings)
+Visualizer::Visualizer(Settings& settings, sf::RenderWindow& window)
 	:m_Settings(settings)
 {
+	// set window position
+	m_Position = sf::Vector2f(window.getSize().x / 5.0f + PADDING * 2.0f, PADDING);
+	m_Size = sf::Vector2f(4.0f * window.getSize().x / 5.0f - PADDING * 3.0f, window.getSize().y - PADDING * 2.0f);
+
+	// create elements
 	for (int32_t i = 0; i < settings.GetNumberOfElements(); i++)
 	{
 		const float space = 2.0f;
 
-		float height = i * 4.0f;
-		float width = m_Size.x / settings.GetNumberOfElements() - space;
+		// makes max value of elements max height and min value of elements min height
+		// creating a linear size distribution
+		float multiplier = m_Size.y / settings.GetNumberOfElements();
+		float height = i * multiplier;
+
+		float width = std::max(m_Size.x / settings.GetNumberOfElements() - space, 1.0f);
 
 		sf::Vector2f position(m_Position.x + i * (width + space), m_Position.y + m_Size.y - height);
 		sf::Vector2f size(width, height);

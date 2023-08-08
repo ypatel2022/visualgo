@@ -20,7 +20,7 @@ private:
 
 
 public:
-	Visualizer(Settings& settings);
+	Visualizer(Settings& settings, sf::RenderWindow& window);
 
 	~Visualizer();
 
