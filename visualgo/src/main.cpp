@@ -9,6 +9,7 @@
 
 int main()
 {
+	
 
 	// create a window & settings
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT, 32), "visualgo", sf::Style::Fullscreen);
