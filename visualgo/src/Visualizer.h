@@ -32,8 +32,14 @@ public:
 
 	void UpdateElements();
 
+<<<<<<< HEAD
 	std::vector<Element> GetElements();
 
+=======
+	std::vector<int32_t>& GetValues();
+
+	std::vector<Element>& GetElements();
+>>>>>>> 1104766d551a42bdda760e6cd8e28c734f4e6e5d
 };
 
 

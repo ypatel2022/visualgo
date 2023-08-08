@@ -1,8 +1,8 @@
-#include "Visualizer.h"
-
-#include "SortingAlgorithms.h"
 #include <algorithm>
 #include <random>
+
+#include "Visualizer.h"
+#include "SortingAlgorithms.h"
 
 Visualizer::Visualizer(Settings& settings)
 	:m_Settings(settings)
@@ -60,6 +60,11 @@ void Visualizer::Randomize()
 
 void Visualizer::UpdateElements()
 {
+	for (int32_t i = 0; i < m_Values.size(); i++)
+	{
+
+	}
+
 	for (int32_t i = 0; i < m_Settings.GetNumberOfElements(); i++)
 	{
 		const float space = 2.0f;
@@ -76,6 +81,18 @@ void Visualizer::UpdateElements()
 	}
 }
 
+<<<<<<< HEAD
 std::vector<Element> Visualizer :: GetElements() {
 	return m_Elements;
 }
+=======
+std::vector<int32_t>& Visualizer::GetValues()
+{
+	return m_Values;
+}
+
+std::vector<Element>& Visualizer::GetElements()
+{
+	return m_Elements;
+}
+>>>>>>> 1104766d551a42bdda760e6cd8e28c734f4e6e5d

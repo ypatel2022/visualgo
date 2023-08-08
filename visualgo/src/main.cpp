@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include<iostream>
-
+#include <thread>
 
 #include "Constants.h"
 #include "Settings.h"
@@ -21,8 +21,6 @@ int main()
 	Visualizer visualizer(settings);
 
 	visualizer.Randomize();
-	
-	
 
 	// while the window is kept open
 	while (window.isOpen())
@@ -52,8 +50,10 @@ int main()
 		window.clear(sf::Color(20, 20, 20));
 
 		// update
-		visualizer.Randomize();
 
+
+
+		visualizer.UpdateElements();
 
 		// render
 		visualizer.Render(window);
