@@ -11,7 +11,6 @@ Element::Element(int32_t value, sf::Vector2f position, sf::Vector2f size)
 
 Element::~Element() { }
 
-
 void Element::Render(sf::RenderWindow& window, sf::Color color = sf::Color::White)
 {
 	if (color.r != 255 && color.b != 255 && color.g != 255)
@@ -39,7 +38,6 @@ int32_t Element::GetValue()
 	return m_Value;
 }
 
-
 sf::Vector2f Element::GetPosition()
 {
 	return m_Position;
@@ -49,4 +47,3 @@ sf::Vector2f Element::GetSize()
 {
 	return m_Size;
 }
-
