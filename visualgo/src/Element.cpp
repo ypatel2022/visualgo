@@ -34,6 +34,12 @@ void Element::SetSize(sf::Vector2f size)
 	m_Shape.setSize(size);
 }
 
+void Element::SetValue(int32_t value)
+{
+	m_Value = value;
+
+}
+
 int32_t Element::GetValue()
 {
 	return m_Value;

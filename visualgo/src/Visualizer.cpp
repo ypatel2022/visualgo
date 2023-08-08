@@ -75,3 +75,7 @@ void Visualizer::UpdateElements()
 		m_Elements[i].SetSize(size);
 	}
 }
+
+std::vector<Element> Visualizer :: GetElements() {
+	return m_Elements;
+}
