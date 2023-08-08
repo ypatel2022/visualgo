@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include<iostream>
 #include <thread>
+#include <future>
 
 #include "Constants.h"
 #include "Settings.h"
@@ -25,7 +26,14 @@ int main()
 
 	Sidebar sidebar(settings, window);
 
-	SortingAlgorithms::SelectionSort(visualizer.GetElements());
+
+
+	auto future = std::async(std::launch::async, [&visualizer]() {
+
+		SortingAlgorithms::SelectionSort(visualizer.GetElements());
+
+		});
+
 
 	// while the window is kept open
 	while (window.isOpen())
