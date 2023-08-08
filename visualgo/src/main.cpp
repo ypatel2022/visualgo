@@ -63,7 +63,7 @@ int main()
 		window.clear(sf::Color(20, 20, 20));
 
 		// update
-
+		sidebar.Update(window);
 
 
 		visualizer.UpdateElements();

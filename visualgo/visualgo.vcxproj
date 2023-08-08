@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\Button.cpp" />
     <ClCompile Include="src\Sidebar.cpp" />
     <ClCompile Include="src\Settings.cpp" />
     <ClCompile Include="src\Element.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="src\Visualizer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\Button.h" />
     <ClInclude Include="src\Sidebar.h" />
     <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\Element.h" />
