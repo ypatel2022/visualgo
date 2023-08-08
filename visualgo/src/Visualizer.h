@@ -30,6 +30,10 @@ public:
 	void Randomize();
 
 	void UpdateElements();
+
+	std::vector<int32_t>& GetValues();
+
+	std::vector<Element>& GetElements();
 };
 
 
