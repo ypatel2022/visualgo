@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Sidebar.cpp" />
     <ClCompile Include="src\Settings.cpp" />
     <ClCompile Include="src\Element.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="src\Visualizer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Sidebar.h" />
     <ClInclude Include="src\Settings.h" />
     <ClInclude Include="src\Element.h" />
     <ClInclude Include="src\Constants.h" />
