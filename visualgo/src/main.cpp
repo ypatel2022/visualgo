@@ -7,22 +7,25 @@
 #include "Visualizer.h"
 #include "Element.h"
 #include "Sidebar.h"
+#include "SortingAlgorithms.h"
 
 int main()
 {
 
 	// create a window & settings
-	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT, 32), "visualgo", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height, 32), "visualgo", sf::Style::Fullscreen);
 	window.setFramerateLimit(144);
 	window.setVerticalSyncEnabled(true);
 
 
-	Settings settings(250, Merge);
+	Settings settings(100, Merge);
 	Visualizer visualizer(settings, window);
 
 	visualizer.Randomize();
 
 	Sidebar sidebar(settings, window);
+
+	SortingAlgorithms::SelectionSort(visualizer.GetElements());
 
 	// while the window is kept open
 	while (window.isOpen())
