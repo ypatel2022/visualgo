@@ -7,18 +7,20 @@
 #include "Visualizer.h"
 #include "Element.h"
 
+
 int main()
 {
+
 	// create a window & settings
 	sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT, 32), "visualgo", sf::Style::Fullscreen);
 	window.setFramerateLimit(144);
 	window.setVerticalSyncEnabled(true);
 
+
 	Settings settings(250, Merge);
 	Visualizer visualizer(settings);
 
 	visualizer.Randomize();
-
 
 	// while the window is kept open
 	while (window.isOpen())

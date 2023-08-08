@@ -1,8 +1,9 @@
 #include "SortingAlgorithms.h"
 
+
 #include <iostream>
 
-void SortingAlgorithms::Sort(std::vector<int32_t> array, SortingAlgorithm algorithm)
+void SortingAlgorithms::Sort(std::vector<Element>& array, SortingAlgorithm algorithm)
 {
 
 	switch (algorithm)
@@ -32,38 +33,38 @@ void SortingAlgorithms::Sort(std::vector<int32_t> array, SortingAlgorithm algori
 
 
 
-void MergeElements(std::vector<int32_t>& arr, int left, int mid, int right)
+void MergeElements(std::vector<Element>& arr, int32_t left, int32_t mid, int32_t right)
 {
-	int n1 = mid - left + 1;
-	int n2 = right - mid;
+	int32_t n1 = mid - left + 1;
+	int32_t n2 = right - mid;
 
 	std::vector<int32_t> leftArr(n1);
 	std::vector<int32_t> rightArr(n2);
 
 	// Copy data to temporary arrays
-	for (int i = 0; i < n1; ++i)
+	for (int32_t i = 0; i < n1; ++i)
 	{
-		leftArr[i] = arr[left + i];
+		leftArr[i] = arr[left + i].GetValue();
 	}
-	for (int j = 0; j < n2; ++j)
+	for (int32_t j = 0; j < n2; ++j)
 	{
 
-		rightArr[j] = arr[mid + 1 + j];
+		rightArr[j] = arr[mid + 1 + j].GetValue();
 	}
 
-	int i = 0, j = 0, k = left;
+	int32_t i = 0, j = 0, k = left;
 
 	// Merge the two arrays
 	while (i < n1 && j < n2)
 	{
 		if (leftArr[i] <= rightArr[j])
 		{
-			arr[k] = leftArr[i];
+			arr[k].SetValue(leftArr[i]);
 			++i;
 		}
 		else
 		{
-			arr[k] = rightArr[j];
+			arr[k].SetValue(rightArr[j]);
 			++j;
 		}
 		++k;
@@ -72,7 +73,7 @@ void MergeElements(std::vector<int32_t>& arr, int left, int mid, int right)
 	// Copy remaining elements of leftArr, if any
 	while (i < n1)
 	{
-		arr[k] = leftArr[i];
+		arr[k].SetValue(leftArr[i]);
 		++i;
 		++k;
 	}
@@ -80,17 +81,17 @@ void MergeElements(std::vector<int32_t>& arr, int left, int mid, int right)
 	// Copy remaining elements of rightArr, if any
 	while (j < n2)
 	{
-		arr[k] = rightArr[j];
+		arr[k].SetValue(rightArr[j]);
 		++j;
 		++k;
 	}
 }
 
-void SortingAlgorithms::MergeSort(std::vector<int32_t>& array, int left, int right)
+void SortingAlgorithms::MergeSort(std::vector<Element>& array, int32_t left, int32_t right)
 {
 	if (left < right)
 	{
-		int mid = left + (right - left) / 2;
+		int32_t mid = left + (right - left) / 2;
 
 		// Recursively sort both halves
 		MergeSort(array, left, mid);
@@ -101,16 +102,16 @@ void SortingAlgorithms::MergeSort(std::vector<int32_t>& array, int left, int rig
 	}
 }
 
-void SortingAlgorithms::SelectionSort(std::vector<int32_t>& array)
+void SortingAlgorithms::SelectionSort(std::vector<Element>& array)
 {
-	int n = (int32_t)array.size();
+	int32_t n = (int32_t)array.size();
 
-	for (int i = 0; i < n - 1; ++i)
+	for (int32_t i = 0; i < n - 1; ++i)
 	{
-		int minIndex = i;
-		for (int j = i + 1; j < n; ++j)
+		int32_t minIndex = i;
+		for (int32_t j = i + 1; j < n; ++j)
 		{
-			if (array[j] < array[minIndex])
+			if (array[j].GetValue() < array[minIndex].GetValue())
 			{
 				minIndex = j;
 			}
@@ -124,15 +125,16 @@ void SortingAlgorithms::SelectionSort(std::vector<int32_t>& array)
 };
 
 
-void SortingAlgorithms::BubbleSort(std::vector<int32_t>& array)
+void SortingAlgorithms::BubbleSort(std::vector<Element>& array, int32_t& numComparisons)
 {
-	int n = (int32_t)array.size();
+	int32_t n = (int32_t)array.size();
 
-	for (int i = 0; i < n - 1; ++i) 
+	for (int32_t i = 0; i < n - 1; ++i) 
 	{
-		for (int j = 0; j < n - i - 1; ++j) 
+		for (int32_t j = 0; j < n - i - 1; ++j) 
 		{
-			if (array[j] > array[j + 1]) 
+			numComparisons++;
+			if (array[j].GetValue() > array[j + 1].GetValue())
 			{
 				// Swap elements if they're out of order
 				std::swap(array[j], array[j + 1]);
@@ -144,13 +146,13 @@ void SortingAlgorithms::BubbleSort(std::vector<int32_t>& array)
 
 
 // Helper function to find the maximum value in an array
-int getMax(const std::vector<int32_t>& array) {
-	int max = array[0];
-	for (int i = 1; i < array.size(); ++i) 
+int getMax(std::vector<Element>& array) {
+	int32_t max = array[0].GetValue();
+	for (int32_t i = 1; i < array.size(); ++i) 
 	{
-		if (array[i] > max) 
+		if (array[i].GetValue() > max)
 		{
-			max = array[i];
+			max = array[i].GetValue();
 		}
 	}
 	return max;
@@ -158,40 +160,40 @@ int getMax(const std::vector<int32_t>& array) {
 
 
 
-void SortingAlgorithms :: RadixSort(std::vector<int32_t>& array)
+void SortingAlgorithms :: RadixSort(std::vector<Element>& array)
 {
-	int max = getMax(array);
-	int exp = 1; // Current digit being considered
+	int32_t max = getMax(array);
+	int32_t exp = 1; // Current digit being considered
 
 	while (max / exp > 0) 
 	{
-		int n = (int32_t)array.size();
+		int32_t n = (int32_t)array.size();
 		std::vector<int32_t> output(n);
 		std::vector<int32_t> count(10, 0);
 
 		// Count occurrences of each digit
-		for (int i = 0; i < n; ++i) 
+		for (int32_t i = 0; i < n; ++i) 
 		{
-			count[(array[i] / exp) % 10]++;
+			count[(array[i].GetValue() / exp) % 10]++;
 		}
 
 		// Update count[i] to store the actual position of this digit in output[]
-		for (int i = 1; i < 10; ++i) 
+		for (int32_t i = 1; i < 10; ++i) 
 		{
 			count[i] += count[i - 1];
 		}
 
 		// Build the output array
-		for (int i = n - 1; i >= 0; --i) 
+		for (int32_t i = n - 1; i >= 0; --i) 
 		{
-			output[count[(array[i] / exp) % 10] - 1] = array[i];
-			count[(array[i] / exp) % 10]--;
+			output[count[(array[i].GetValue() / exp) % 10] - 1] = array[i].GetValue();
+			count[(array[i].GetValue() / exp) % 10]--;
 		}
 
 		// Copy the output array back to the original array
-		for (int i = 0; i < n; ++i) 
+		for (int32_t i = 0; i < n; ++i) 
 		{
-			array[i] = output[i];
+			array[i].SetValue(output[i]);
 		}
 
 		exp *= 10; // Move to the next digit
@@ -200,11 +202,11 @@ void SortingAlgorithms :: RadixSort(std::vector<int32_t>& array)
 }
 
 
-void SortingAlgorithms::ShellSort(std::vector <int32_t>& array, bool useKnuth) 
+void SortingAlgorithms::ShellSort(std::vector <Element>& array, bool useKnuth) 
 {
-	int n = (int32_t)array.size();
+	int32_t n = (int32_t)array.size();
 
-	int gap;
+	int32_t gap;
 	if (useKnuth) 
 	{
 		gap = 1;
@@ -222,15 +224,15 @@ void SortingAlgorithms::ShellSort(std::vector <int32_t>& array, bool useKnuth)
 	// Start with the chosen gap and reduce it on each iteration
 	while (gap >= 1) 
 	{
-		for (int i = gap; i < n; ++i) 
+		for (int32_t i = gap; i < n; ++i) 
 		{
-			int temp = array[i];
-			int j;
-			for (j = i; j >= gap && array[j - gap] > temp; j -= gap) 
+			int32_t temp = array[i].GetValue();
+			int32_t j;
+			for (j = i; j >= gap && array[j - gap].GetValue() > temp; j -= gap)
 			{
 				array[j] = array[j - gap];
 			}
-			array[j] = temp;
+			array[j].SetValue(temp);
 		}
 		if (useKnuth) 
 		{
@@ -245,13 +247,13 @@ void SortingAlgorithms::ShellSort(std::vector <int32_t>& array, bool useKnuth)
 }
 
 
-int partition(std::vector<int32_t>& array, int low, int high) {
-	int pivot = array[high];
-	int i = (low - 1);
+int32_t partition(std::vector<Element>& array, int32_t low, int32_t high) {
+	int32_t pivot = array[high].GetValue();
+	int32_t i = (low - 1);
 
-	for (int j = low; j <= high - 1; ++j) 
+	for (int32_t j = low; j <= high - 1; ++j) 
 	{
-		if (array[j] < pivot) 
+		if (array[j].GetValue() < pivot) 
 		{
 			++i;
 			std::swap(array[i], array[j]);
@@ -261,36 +263,36 @@ int partition(std::vector<int32_t>& array, int low, int high) {
 	return (i + 1);
 }
 
-void quickSortHelper(std::vector<int32_t>& array, int low, int high) {
+void quickSortHelper(std::vector<Element>& array, int32_t low, int32_t high) {
 	if (low < high) 
 	{
-		int pi = partition(array, low, high);
+		int32_t pi = partition(array, low, high);
 
 		quickSortHelper(array, low, pi - 1);
 		quickSortHelper(array, pi + 1, high);
 	}
 }
 
-void SortingAlgorithms::QuickSort(std::vector<int32_t>& array)
+void SortingAlgorithms::QuickSort(std::vector<Element>& array)
 {
-	int n = array.size();
+	int32_t n = (int32_t)array.size();
 	quickSortHelper(array, 0, n - 1);
 
 }
 
 
-void heapify(std::vector<int32_t>& array, int n, int i) 
+void heapify(std::vector<Element>& array, int32_t n, int32_t i) 
 {
-	int largest = i;
-	int left = 2 * i + 1;
-	int right = 2 * i + 2;
+	int32_t largest = i;
+	int32_t left = 2 * i + 1;
+	int32_t right = 2 * i + 2;
 
-	if (left < n && array[left] > array[largest]) 
+	if (left < n && array[left].GetValue() > array[largest].GetValue())
 	{
 		largest = left;
 	}
 
-	if (right < n && array[right] > array[largest]) 
+	if (right < n && array[right].GetValue() > array[largest].GetValue())
 	{
 		largest = right;
 	}
@@ -302,22 +304,30 @@ void heapify(std::vector<int32_t>& array, int n, int i)
 	}
 }
 
-void SortingAlgorithms::HeapSort(std::vector<int32_t>& array)
+void SortingAlgorithms::HeapSort(std::vector<Element>& array)
 {
-	int n = (int32_t)array.size();
+	int32_t n = (int32_t)array.size();
 
 	// Build max-heap
-	for (int i = n / 2 - 1; i >= 0; --i) 
+	for (int32_t i = n / 2 - 1; i >= 0; --i) 
 	{
 		heapify(array, n, i);
 	}
 
 	// Extract elements from heap one by one
-	for (int i = n - 1; i > 0; --i) 
+	for (int32_t i = n - 1; i > 0; --i) 
 	{
 		std::swap(array[0], array[i]);
 		heapify(array, i, 0);
 	}
+
+}
+
+void SortingAlgorithms::BogoSort(std::vector<Element>& array) 
+{
+	
+
+
 
 }
 

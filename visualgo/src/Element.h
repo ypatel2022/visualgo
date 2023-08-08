@@ -18,6 +18,8 @@ public:
 
 	~Element();
 
+	void SetValue(int32_t value);
+
 	void SetPosition(sf::Vector2f position);
 
 	void Render(sf::RenderWindow& window, sf::Color color);

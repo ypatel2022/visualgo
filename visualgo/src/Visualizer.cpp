@@ -81,6 +81,11 @@ void Visualizer::UpdateElements()
 	}
 }
 
+<<<<<<< HEAD
+std::vector<Element> Visualizer :: GetElements() {
+	return m_Elements;
+}
+=======
 std::vector<int32_t>& Visualizer::GetValues()
 {
 	return m_Values;
@@ -90,3 +95,4 @@ std::vector<Element>& Visualizer::GetElements()
 {
 	return m_Elements;
 }
+>>>>>>> 1104766d551a42bdda760e6cd8e28c734f4e6e5d
