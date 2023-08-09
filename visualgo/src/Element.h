@@ -14,6 +14,8 @@ private:
 
 public:
 
+	Element();
+
 	Element(int32_t value, sf::Vector2f position, sf::Vector2f size);
 
 	~Element();

@@ -1,6 +1,11 @@
 #include "Element.h"
 
 
+Element::Element() : m_Value(0), m_Position(sf::Vector2f(0, 0)), m_Size(sf::Vector2f(0, 0)) {
+	m_Shape.setSize(m_Size);
+	m_Shape.setPosition(m_Position);
+}
+
 Element::Element(int32_t value, sf::Vector2f position, sf::Vector2f size)
 	:m_Value(value), m_Position(position), m_Size(size)
 {

@@ -2,6 +2,8 @@
 
 #include <vector>
 #include "Element.h"
+#include <random>
+#include <algorithm>
 
 enum SortingAlgorithm
 {
