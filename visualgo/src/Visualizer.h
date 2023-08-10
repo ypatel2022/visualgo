@@ -6,6 +6,7 @@
 #include "Element.h"
 #include "Settings.h"
 
+
 class Visualizer
 {
 private:

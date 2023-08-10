@@ -1,38 +1,50 @@
+
 #include <SFML/Graphics.hpp>
+
 #include<iostream>
 #include <thread>
 #include <future>
 
+
 #include "Constants.h"
 #include "Settings.h"
 #include "Visualizer.h"
+#include "SoundPlayer.h"
 #include "Element.h"
 #include "Sidebar.h"
 #include "SortingAlgorithms.h"
 
+
+
+
+const unsigned int SAMPLE_RATE = 44100;
 int main()
 {
 
+	
+	
 	// create a window & settings
 	sf::RenderWindow window(sf::VideoMode(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height, 32), "visualgo", sf::Style::Fullscreen);
 	window.setFramerateLimit(144);
 	window.setVerticalSyncEnabled(true);
 
 
-	Settings settings(100, Merge);
+	Settings settings(20, Merge);
 	Visualizer visualizer(settings, window);
+	SoundPlayer soundplayer;
+
+
 
 	visualizer.Randomize();
 
 	Sidebar sidebar(settings, window);
 
+	auto future = std::async(std::launch::async, [&visualizer,&soundplayer]() 
+	{
+		
+		SortingAlgorithms::SelectionSort(visualizer.GetElements(),soundplayer);
 
-
-	auto future = std::async(std::launch::async, [&visualizer]() {
-
-		SortingAlgorithms::SelectionSort(visualizer.GetElements());
-
-		});
+	});
 
 
 	// while the window is kept open

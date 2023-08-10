@@ -45,7 +45,16 @@ void Visualizer::Render(sf::RenderWindow& window)
 	// render elements
 	for (Element element : m_Elements)
 	{
-		element.Render(window, sf::Color::White);
+		if (element.GetIsSwapped() == true) 
+		{
+			element.Render(window, sf::Color::Green);
+
+		}
+		else
+		{
+			element.Render(window, sf::Color::White);
+		}
+		
 	}
 
 	// render border

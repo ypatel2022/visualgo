@@ -111,7 +111,7 @@ void SortingAlgorithms::MergeSort(std::vector<Element>& array, int32_t left, int
 
 
 
-void SortingAlgorithms::BubbleSort(std::vector<Element>& array, int32_t& numComparisons)
+void SortingAlgorithms::BubbleSort(std::vector<Element>& array, int32_t& numComparisons, SoundPlayer& player)
 {
 	
 	int32_t n = (int32_t)array.size();
@@ -125,6 +125,8 @@ void SortingAlgorithms::BubbleSort(std::vector<Element>& array, int32_t& numComp
 			numComparisons++;
 			if (array[j].GetValue() > array[j + 1].GetValue())
 			{
+				player.setPitchMultiplier(array[j].GetValue());
+				player.play();
 				// Swap elements if they're out of order
 				std::swap(array[j], array[j + 1]);
 			}
@@ -193,17 +195,23 @@ void SortingAlgorithms :: RadixSort(std::vector<Element>& array)
 }
 
 
-void SortingAlgorithms::SelectionSort(std::vector<Element>& array)
+void SortingAlgorithms::SelectionSort(std::vector<Element>& array, SoundPlayer& player)
 {
 
 	int32_t n = (int32_t)array.size();
 
 	for (int32_t i = 0; i < n - 1; ++i)
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
 		int32_t minIndex = i;
+		player.setPitchMultiplier(array[minIndex].GetValue());
+		player.play();
 		for (int32_t j = i + 1; j < n; ++j)
 		{
+			player.setPitchMultiplier(array[j].GetValue());
+			player.play();
+
+			
 			if (array[j].GetValue() < array[minIndex].GetValue())
 			{
 				minIndex = j;
@@ -212,8 +220,22 @@ void SortingAlgorithms::SelectionSort(std::vector<Element>& array)
 
 		if (minIndex != i)
 		{
+
+			player.setPitchMultiplier(array[i].GetValue());
+			player.play();
+			player.setPitchMultiplier(array[minIndex].GetValue());
+			player.play();
 			std::swap(array[i], array[minIndex]);
+			player.setPitchMultiplier(array[i].GetValue());
+			player.play();
+			player.setPitchMultiplier(array[minIndex].GetValue());
+			player.play();
+			
+			
 		}
+		//array[i].SetIsSwapped(true);
+		
+
 	}
 };
 
@@ -321,36 +343,44 @@ void heapify(std::vector<Element>& array, int32_t n, int32_t i)
 
 	if (largest != i) 
 	{
+		
 		std::swap(array[i], array[largest]);
 		heapify(array, n, largest);
 	}
 }
 
-void SortingAlgorithms::HeapSort(std::vector<Element>& array)
+void SortingAlgorithms::HeapSort(std::vector<Element>& array, SoundPlayer& player)
 {
 	int32_t n = (int32_t)array.size();
 
 	// Build max-heap
 	for (int32_t i = n / 2 - 1; i >= 0; --i) 
+
 	{
+		player.setPitchMultiplier(array[i].GetValue());
+		player.play();
 		heapify(array, n, i);
 	}
 
 	// Extract elements from heap one by one
 	for (int32_t i = n - 1; i > 0; --i) 
 	{
+		player.setPitchMultiplier(array[i].GetValue());
+		player.play();
 		std::swap(array[0], array[i]);
 		heapify(array, i, 0);
 	}
 
 }
 
-bool isSorted(std :: vector<Element>& array) 
+bool isSorted(std :: vector<Element>& array, SoundPlayer& player) 
 {
 	for (size_t i = 1; i < (int32_t)array.size(); ++i) 
 	{
 		if (array[i].GetValue() < array[i - 1].GetValue()) 
 		{
+			player.setPitchMultiplier(array[i].GetValue());
+			player.play();
 			return false;
 		}
 	}
@@ -362,13 +392,17 @@ void shuffleArray(std::vector<Element>& array)
 	std::random_device rd;
 	std::mt19937 rng(rd());
 	std::shuffle(array.begin(), array.end(), rng);
+	
+	
+
+	
 }
 
-void SortingAlgorithms::BogoSort(std::vector<Element>& array) 
+void SortingAlgorithms::BogoSort(std::vector<Element>& array, SoundPlayer& player) 
 {
-	while (!isSorted(array)) 
+	while (!isSorted(array, player)) 
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		shuffleArray(array);
 	}
 
